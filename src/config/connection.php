@@ -1,7 +1,7 @@
 <?php
 use Dotenv\Dotenv;
 
-require '../vendor/autoload.php'; 
+require __DIR__ . '/../../vendor/autoload.php';
 
 class Database
 {
@@ -9,7 +9,7 @@ class Database
 
     public function __construct()
     {
-        $dotenv = Dotenv::createImmutable(dirname(__DIR__));
+        $dotenv = Dotenv::createImmutable(dirname(__DIR__, 2));
         $dotenv->load();
         $dsn = "mysql:host=" . $_ENV['DB_SERVER'] . ";dbname=" . $_ENV['DB_NAME'] . ";charset=utf8";
         $username = $_ENV['DB_USERNAME'];
@@ -24,7 +24,7 @@ class Database
         try {
             
             $this->pdo = new PDO($dsn, $username, $password, $options);
-            echo "Connected successfully";
+            // echo "Connected successfully";
         } catch (PDOException $e) {
            
             die("Connection failed: " . $e->getMessage());
