@@ -1,4 +1,3 @@
-<!-- Dans le fichier src/views/edit_tag.php -->
 
 <?php
 require __DIR__.'/../controler/tags.php';

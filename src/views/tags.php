@@ -123,7 +123,7 @@ $tags =tags::displayTags();
         </thead>
         <tbody id="tagTableBody">
             <?php
-            // Afficher les tags récupérés par le contrôleur
+           
             if (!empty($tags)) {
                 foreach ($tags as $tag) {
                     echo "<tr>
