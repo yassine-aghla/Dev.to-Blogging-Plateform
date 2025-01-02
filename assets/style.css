@@ -307,7 +307,7 @@ body {
 
 
  /* ========================= formulaire ====================  */
-.form-container  {
+/* .form-container  {
   margin-top: 20px;
     width: 50%;
     background-color:  rgba(0, 0, 0, 0.5);
@@ -317,9 +317,9 @@ body {
     height: 100vh;
    margin: auto;
    /* display: none; */
- }
+ /* } */
 
- .form-container h2 {
+ /* .form-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #fcf9f9;
@@ -369,7 +369,7 @@ body {
     }
     .btn-submit:hover {
       background-color: #2700b3;
-    }
+    } */ */
   .club{
     margin-top: 100px;
     width: 90%;
@@ -388,7 +388,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  h1 {
+  /* h1 {
     text-align: center;
     color: #333;
   }
@@ -447,6 +447,26 @@ body {
   .btn-delete {
     background-color: #dc3545;
     color: #fff;
+  } */
+
+
+  .form-container, .table-container {
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table, th, td {
+    border: 1px solid #ccc;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  button {
+    padding: 5px 10px;
+    cursor: pointer;
   }
   /* Global styles */
 

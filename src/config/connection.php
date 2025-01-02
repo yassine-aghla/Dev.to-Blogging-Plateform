@@ -3,11 +3,12 @@ use Dotenv\Dotenv;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+
 class Database
 {
-    private $pdo;
+    private static $pdo;
 
-    public function __construct()
+    public static function getConnection()
     {
         $dotenv = Dotenv::createImmutable(dirname(__DIR__, 2));
         $dotenv->load();
@@ -23,19 +24,21 @@ class Database
 
         try {
             
-            $this->pdo = new PDO($dsn, $username, $password, $options);
+            self::$pdo = new PDO($dsn, $username, $password, $options);
             // echo "Connected successfully";
         } catch (PDOException $e) {
            
             die("Connection failed: " . $e->getMessage());
         }
+
+        return self::$pdo;
     }
 
     
-    public function getConnection()
-    {
-        return $this->pdo;
-    }
+    // public static function getConnection()
+    // {
+    //     return self::$pdo;
+    // }
 }
 
 

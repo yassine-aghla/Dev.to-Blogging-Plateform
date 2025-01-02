@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="../../assets/style.css">
 </head>
 
 <body>
@@ -52,7 +52,7 @@
                 </li>
 
                 <li>
-                    <a href="../includes/nationalite.php">
+                    <a href="./includes/tags.php">
                         <span class="icon">
                         <ion-icon name="pricetag-outline"></ion-icon>
                         </span>

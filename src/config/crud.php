@@ -1,44 +1,69 @@
 <?php
 // Inclure le fichier de connexion avec le bon chemin relatif
 
-include '../config/connection.php';
+require_once __DIR__.'/connection.php';
+
 class crud {
-    private $conn;
+    private static $conn;
 
-    public function __construct($pdo) {
-        $this->conn = $pdo;
-    }
+    // public function __construct($pdo) {
+    //     self::$conn = $pdo;
+    // }
 
-    public function insert($table, $data) {
+
+    // public static function insert($table,$columns, $data) {
+    //     $conn = Database::getConnection();
+    //     //  $db = new Database();
+    //     //  $pdo = $db->getConnection();
+    //     // $columns = implode(", ", $data);
+    //     // $placeholders = ":" . implode(", :", array_keys($data));
+
+    //     $query = "INSERT INTO $table ($columns) VALUES ('$data')";
+    //     // var_dump($query);
+    //     $stmt = $conn->prepare($query);
+
+    //     // Bind parameters
+    //     // foreach ($data as $key => $value) {
+    //         // $stmt->bindParam(':data', $data);
+    //     // }
+
+    //     return $stmt->execute();
+    // }
+    public static function insert($table, $data) {
+        $conn = Database::getConnection();
+        
         $columns = implode(", ", array_keys($data));
         $placeholders = ":" . implode(", :", array_keys($data));
 
         $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-        $stmt = $this->conn->prepare($query);
+        $stmt = $conn->prepare($query);
 
-        // Bind parameters
         foreach ($data as $key => $value) {
-            $stmt->bindParam(":$key", $data[$key]);
+            $stmt->bindValue(":$key", $value);
         }
 
         return $stmt->execute();
     }
 
+
+
     // READ
-    public function select($table, $columns = "*", $conditions = null) {
+    public static function select($table, $columns = "*", $conditions = null) {
+        $conn = Database::getConnection();
+         
         $query = "SELECT $columns FROM $table";
         if ($conditions) {
             $query .= " WHERE $conditions";
         }
-
-        $stmt = $this->conn->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // UPDATE
-    public function update($table, $data, $conditions) {
+    public static function update($table, $data, $conditions) {
+        $conn = Database::getConnection();
         $fields = [];
         foreach ($data as $key => $value) {
             $fields[] = "$key = :$key";
@@ -46,7 +71,7 @@ class crud {
         $fieldsString = implode(", ", $fields);
 
         $query = "UPDATE $table SET $fieldsString WHERE $conditions";
-        $stmt = $this->conn->prepare($query);
+        $stmt =$conn->prepare($query);
 
         foreach ($data as $key => $value) {
             $stmt->bindParam(":$key", $data[$key]);
@@ -56,13 +81,18 @@ class crud {
     }
 
     // DELETE
-    public function delete($table, $conditions) {
+    public static function delete($table, $conditions) {
+        $conn = Database::getConnection();
         $query = "DELETE FROM $table WHERE $conditions";
-        $stmt = $this->conn->prepare($query);
+        $stmt =$conn->prepare($query);
 
         return $stmt->execute();
     }
 }
+
+
+// $bb= crud::select('tags');
+// var_dump($bb);
 
 
 // $db = new Database();
