@@ -1,3 +1,9 @@
+<?php
+require __DIR__.'/../controler/tags.php';
+require __DIR__.'/../controler/categories.php';
+tags::getTagCount();
+CategoriesController::getCategoryCount();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +22,7 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="../includes/dashboard.php">
+                    <a href="dashboard.php">
                         <span class="icon">
                         <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
@@ -25,7 +31,7 @@
                 </li>
 
                 <li>
-                    <a href="../includes/dashboard.php">
+                    <a href="dashboard.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -34,7 +40,7 @@
                 </li>
 
                 <li>
-                    <a href="../includes/players.php">
+                    <a href="articles.php">
                         <span class="icon">
                         <ion-icon name="document-text-outline"></ion-icon>
                         </span>
@@ -43,7 +49,7 @@
                 </li>
 
                 <li>
-                    <a href="../includes/club.php">
+                    <a href="categories.php">
                         <span class="icon">
                            <ion-icon name="grid-outline"></ion-icon>
                         </span>
@@ -52,7 +58,7 @@
                 </li>
 
                 <li>
-                    <a href="./includes/tags.php">
+                    <a href="tags.php">
                         <span class="icon">
                         <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -60,7 +66,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../includes/nationalite.php">
+                    <a href="../../nationalite.php">
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>
@@ -94,7 +100,7 @@
                 </div>
 
                 <div class="user">
-                    <img src="assets/img me.jpg" alt="">
+                    <img src="assets/me.jpg" alt="">
                 </div>
             </div>
 
@@ -124,7 +130,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">0</div>
+                        <div class="numbers"><?php echo tags::getTagCount(); ?></div>
                         <div class="cardName">Tags</div>
                     </div>
 
@@ -135,7 +141,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">0</div>
+                        <div class="numbers"><?php echo CategoriesController::getCategoryCount(); ?></div>
                         <div class="cardName">Categories</div>
                     </div>
 

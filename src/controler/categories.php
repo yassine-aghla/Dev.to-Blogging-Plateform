@@ -33,6 +33,10 @@ class CategoriesController {
     public static function displayCategories() {
         return Category::getAllCategories();
     }
+    public static function getCategoryCount() {
+        return Category::countCategories();
+    }
+  
 }
 
 CategoriesController::handleRequest();

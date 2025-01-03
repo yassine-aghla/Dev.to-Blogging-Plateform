@@ -50,6 +50,10 @@ class Tag {
         public static function deleteTag($id) {
             return crud::delete('tags', "id = $id");
         }
+        public static function countTags() {
+            $result = crud::select(self::$table, "COUNT(*) as total");
+            return $result[0]['total'] ?? 0;
+        }
 
 
     // public static function addtag($data){

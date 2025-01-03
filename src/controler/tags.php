@@ -49,7 +49,9 @@ public static function displayTags()
 }
 // Dans le fichier src/tags.php
 
-
+public static function getTagCount() {
+    return Tag::countTags();
+}
 
 
 

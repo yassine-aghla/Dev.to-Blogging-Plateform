@@ -1,34 +1,12 @@
 <?php
 // Inclure le fichier de connexion avec le bon chemin relatif
 
-require_once __DIR__.'/connection.php';
+require __DIR__.'/connection.php';
 
 class crud {
     private static $conn;
-
-    // public function __construct($pdo) {
-    //     self::$conn = $pdo;
-    // }
-
-
-    // public static function insert($table,$columns, $data) {
-    //     $conn = Database::getConnection();
-    //     //  $db = new Database();
-    //     //  $pdo = $db->getConnection();
-    //     // $columns = implode(", ", $data);
-    //     // $placeholders = ":" . implode(", :", array_keys($data));
-
-    //     $query = "INSERT INTO $table ($columns) VALUES ('$data')";
-    //     // var_dump($query);
-    //     $stmt = $conn->prepare($query);
-
-    //     // Bind parameters
-    //     // foreach ($data as $key => $value) {
-    //         // $stmt->bindParam(':data', $data);
-    //     // }
-
-    //     return $stmt->execute();
-    // }
+  
+    
     public static function insert($table, $data) {
         $conn = Database::getConnection();
         
@@ -88,34 +66,11 @@ class crud {
 
         return $stmt->execute();
     }
+ 
+    
 }
 
 
-// $bb= crud::select('tags');
-// var_dump($bb);
-
-
-// $db = new Database();
-// $pdo = $db->getConnection();
-
-// Créer une instance de la classe Tags et utiliser ses méthodes
-// $tags = new Tags($pdo);
-
-// // Exemple d'utilisation de la méthode 'insert' pour ajouter un tag
-// // $data = ['name' => 'java'];
-// // $tags->insert('tags', $data);
-
-// // Exemple d'utilisation de la méthode 'select' pour récupérer tous les tags
-// $tagsList = $tags->select('tags');
-// echo "<pre>";
-// print_r($tagsList);
-// echo "</pre>";
-// $data = ['name' => 'django'];
-// $tags->update('tags',[
-//     'name' => 'vue js'
-// ], "id = 7");
-
-// $tags->delete('tags',"id = 7");
 
 
 ?>

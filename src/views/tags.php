@@ -13,6 +13,113 @@ $tags =tags::displayTags();
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="../../assets/style.css">
+    <style>
+        form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+  }
+  .form-container{
+    width:500px;
+    margin:auto;
+ margin-bottom:30px;
+  }
+  form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  form button {
+    background-color:#2a2185;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  form button:hover {
+    background-color:#2a2185;
+  }
+  
+  .table-container {
+    margin-top: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table th,
+  table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #dddddd;
+  }
+  
+  table th {
+    background-color:#2a2185;
+    color: white;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  table a {
+    color:#2a2185;
+    text-decoration: none;
+    margin-right: 10px;
+    
+  }
+  
+  table a:hover {
+    text-decoration: none;
+  }
+  .delete {
+  border: 2px solid red; /* Bordure rouge */
+  padding: 5px 10px; /* Espace intérieur */
+  border-radius: 5px; /* Coins arrondis */
+  color: red; /* Texte rouge */
+  background-color: #ffe6e6; /* Fond légèrement rouge */
+  text-decoration: none; /* Pas de soulignement pour les liens */
+}
+
+.delete:hover {
+  background-color: red; /* Fond rouge vif au survol */
+  color: white; /* Texte blanc */
+}
+
+.update {
+  border: 2px solid green; /* Bordure verte */
+  padding: 5px 10px; /* Espace intérieur */
+  border-radius: 5px; /* Coins arrondis */
+  color: green; /* Texte vert */
+  background-color: #e6ffe6; /* Fond légèrement vert */
+  text-decoration: none; /* Pas de soulignement pour les liens */
+}
+
+.update:hover {
+  background-color: green; /* Fond vert vif au survol */
+  color: white; /* Texte blanc */
+}
+ 
+
+        </style>
 </head>
 
 <body>
@@ -30,7 +137,7 @@ $tags =tags::displayTags();
                 </li>
 
                 <li>
-                    <a href="../includes/dashboard.php">
+                    <a href="dashboard.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -48,7 +155,7 @@ $tags =tags::displayTags();
                 </li>
 
                 <li>
-                    <a href="../includes/club.php">
+                    <a href="categories.php">
                         <span class="icon">
                            <ion-icon name="grid-outline"></ion-icon>
                         </span>
@@ -57,7 +164,7 @@ $tags =tags::displayTags();
                 </li>
 
                 <li>
-                    <a href="./includes/tags.php">
+                    <a href="tags.php">
                         <span class="icon">
                         <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
@@ -65,7 +172,7 @@ $tags =tags::displayTags();
                     </a>
                 </li>
                 <li>
-                    <a href="../includes/nationalite.php">
+                    <a href="nationalite.php">
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>
@@ -99,7 +206,7 @@ $tags =tags::displayTags();
                 </div>
 
                 <div class="user">
-                    <img src="../assets/img me.jpg" alt="">
+                    <img src="../../assets/me.jpg" alt="">
                 </div>
             </div>
       <!-- affichage  -->
@@ -130,8 +237,8 @@ $tags =tags::displayTags();
                             <td>{$tag['id']}</td>
                             <td>{$tag['name']}</td>
                             <td>
-                                <a href='edit_tag.php?id={$tag['id']}'>Modifier</a>
-                                 <a href='tags.php?action=delete&id={$tag['id']}'>Supprimer</a>
+                                <a class='update' href='edit_tag.php?id={$tag['id']}'>Modifier</a>
+                                 <a class='delete' href='tags.php?action=delete&id={$tag['id']}'>Supprimer</a>
                             </td>
                           </tr>";
                 }

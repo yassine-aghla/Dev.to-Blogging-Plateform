@@ -1,5 +1,5 @@
 <?php
-include __DIR__.'/../config/crud.php';
+require_once __DIR__.'/../config/crud.php';
 
 class Category {
     private static $table = 'categories';
@@ -37,5 +37,9 @@ class Category {
 
     public static function deleteCategory($id) {
         return crud::delete(self::$table, "id = $id");
+    }
+    public static function countCategories() {
+        $result = crud::select(self::$table, "COUNT(*) as total");
+        return $result[0]['total'] ?? 0;
     }
 }
