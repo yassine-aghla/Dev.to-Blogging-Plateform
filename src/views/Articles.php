@@ -14,15 +14,6 @@ include __DIR__.'/../config/connection.php';
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="../../assets/style.css">
     <style>
-        /* body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        } */
 
         .form-container {
             background-color: white;

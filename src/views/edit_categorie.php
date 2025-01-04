@@ -17,6 +17,7 @@ require __DIR__.'/../model/Category.php';
     flex-direction: column;
     gap: 15px;
     width:300px;
+ 
 
   }
   .form-container{
