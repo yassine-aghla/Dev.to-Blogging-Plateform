@@ -35,7 +35,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])
 
 // Afficher les tags
 $tags = Tag::getAllTags();  // Récupérer tous les tags
-// include 'views/tags.php';    // Afficher la vue des tags
+
 
 
 }
@@ -47,7 +47,7 @@ public static function displayTags()
     $tags = Tag::getAllTags();
     return $tags;
 }
-// Dans le fichier src/tags.php
+
 
 public static function getTagCount() {
     return Tag::countTags();
