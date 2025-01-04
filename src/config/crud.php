@@ -1,5 +1,5 @@
 <?php
-// Inclure le fichier de connexion avec le bon chemin relatif
+
 
 require __DIR__.'/connection.php';
 

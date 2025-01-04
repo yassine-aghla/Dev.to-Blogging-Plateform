@@ -44,4 +44,13 @@ class Database
 
 $db = new Database();
 $pdo = $db->getConnection();
+
+$sql = "SELECT id, name FROM categories";
+$stmt = $pdo->query($sql);
+$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT id, name FROM tags";
+$stmt = $pdo->query($sql);
+$tags = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+

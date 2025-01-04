@@ -41,3 +41,4 @@ class CategoriesController {
 
 CategoriesController::handleRequest();
 $categories = CategoriesController::displayCategories();
+?>

@@ -91,31 +91,31 @@ $tags =tags::displayTags();
     text-decoration: none;
   }
   .delete {
-  border: 2px solid red; /* Bordure rouge */
-  padding: 5px 10px; /* Espace intérieur */
-  border-radius: 5px; /* Coins arrondis */
-  color: red; /* Texte rouge */
-  background-color: #ffe6e6; /* Fond légèrement rouge */
-  text-decoration: none; /* Pas de soulignement pour les liens */
+  border: 2px solid red; 
+  padding: 5px 10px; 
+  border-radius: 5px; 
+  color: red; 
+  background-color: #ffe6e6; 
+  text-decoration: none; 
 }
 
 .delete:hover {
-  background-color: red; /* Fond rouge vif au survol */
-  color: white; /* Texte blanc */
+  background-color: red;
+  color: white; 
 }
 
 .update {
-  border: 2px solid green; /* Bordure verte */
-  padding: 5px 10px; /* Espace intérieur */
-  border-radius: 5px; /* Coins arrondis */
-  color: green; /* Texte vert */
-  background-color: #e6ffe6; /* Fond légèrement vert */
-  text-decoration: none; /* Pas de soulignement pour les liens */
+  border: 2px solid green; 
+  padding: 5px 10px; 
+  border-radius: 5px; 
+  color: green; 
+  background-color: #e6ffe6;
+  text-decoration: none; 
 }
 
 .update:hover {
-  background-color: green; /* Fond vert vif au survol */
-  color: white; /* Texte blanc */
+  background-color: green;
+  color: white; 
 }
  
 
@@ -146,7 +146,7 @@ $tags =tags::displayTags();
                 </li>
 
                 <li>
-                    <a href="../includes/players.php">
+                    <a href="Articles.php">
                         <span class="icon">
                         <ion-icon name="document-text-outline"></ion-icon>
                         </span>
