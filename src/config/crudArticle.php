@@ -12,15 +12,16 @@ class Article {
 
             
             $query = "INSERT INTO " . self::$table . " 
-                (title, content, excerpt, meta_description, category_id, status, scheduled_date, author_id, slug) 
+                (title, content, excerpt, featured_image,meta_description, category_id, status, scheduled_date, author_id, slug) 
                 VALUES 
-                (:title, :content, :excerpt, :meta_description, :category_id, :status, :scheduled_date, :author_id, :slug)";
+                (:title, :content, :excerpt, :featured_image, :meta_description, :category_id, :status, :scheduled_date, :author_id, :slug)";
 
             $stmt = $conn->prepare($query);
 
             $stmt->bindParam(':title', $data['title']);
             $stmt->bindParam(':content', $data['content']);
             $stmt->bindParam(':excerpt', $data['excerpt']);
+            $stmt->bindParam(':featured_image', $data['featured_image']);
             $stmt->bindParam(':meta_description', $data['meta_description']);
             $stmt->bindParam(':category_id', $data['category_id']);
             $stmt->bindParam(':status', $data['status']);
@@ -77,6 +78,37 @@ class Article {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public static function updateArticle($id, $data) {
+        $conn = Database::getConnection();
+    
+        try {
+            $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data['title'])));
+    
+            $query = "UPDATE " . self::$table . " 
+                      SET title = :title, content = :content, excerpt = :excerpt, featured_image = :featured_image, 
+                          meta_description = :meta_description, category_id = :category_id, status = :status, 
+                          scheduled_date = :scheduled_date, slug = :slug
+                      WHERE id = :id";
+    
+            $stmt = $conn->prepare($query);
+    
+            $stmt->bindParam(':title', $data['title']);
+            $stmt->bindParam(':content', $data['content']);
+            $stmt->bindParam(':excerpt', $data['excerpt']);
+            $stmt->bindParam(':featured_image', $data['featured_image']);
+            $stmt->bindParam(':meta_description', $data['meta_description']);
+            $stmt->bindParam(':category_id', $data['category_id']);
+            $stmt->bindParam(':status', $data['status']);
+            $stmt->bindParam(':scheduled_date', $data['scheduled_date']);
+            $stmt->bindParam(':slug', $slug);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            die("Erreur lors de la mise à jour de l'article : " . $e->getMessage());
+        }
+    }
     public static function deleteArticle($id) {
     
             $conn = Database::getConnection();
@@ -86,6 +118,29 @@ class Article {
             $stmt->execute();
             
         
+    }
+    public static function getTagsForArticle($articleId) {
+        $conn = Database::getConnection();
+        
+        $query = "
+            SELECT tags.id, tags.name
+            FROM tags
+            INNER JOIN article_tags ON tags.id = article_tags.tag_id
+            WHERE article_tags.article_id = :article_id
+        ";
+    
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':article_id', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function removeTags($articleId) {
+        $conn = Database::getConnection();
+        $query = "DELETE FROM article_tags WHERE article_id = :article_id";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':article_id', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
     }
     
 }

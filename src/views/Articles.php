@@ -270,7 +270,7 @@ $articles = Article::getAllArticlesWithDetails();
                         <td><?= htmlspecialchars($article['created_at']) ?></td>
                         <td>
                             <?php if ($article['featured_image']): ?>
-                                <img src="<?= htmlspecialchars($article['featured_image']) ?>" alt="Image" style="width: 100px; height: auto;">
+                                <img src="<?= htmlspecialchars($article['featured_image']) ?>" alt="Image" style="width: 60px; height: auto;">
                             <?php else: ?>
                                 Aucune image
                             <?php endif; ?>
