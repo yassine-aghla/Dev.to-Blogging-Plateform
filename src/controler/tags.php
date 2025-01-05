@@ -24,24 +24,23 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])
 }
 
 // Afficher les tags
-<<<<<<< HEAD
 $tags = Tag::getAllTags();  
-=======
+
 $tags = Tag::getAllTags();  // Récupérer tous les tags
 
 
 
->>>>>>> 6e1b8e8a15d2d9fdc9b0f3f74b6d122f066dc859
+
 }
 public static function displayTags()
 {
     $tags = Tag::getAllTags();
     return $tags;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 6e1b8e8a15d2d9fdc9b0f3f74b6d122f066dc859
+
+
+
 
 public static function getTagCount() {
     return Tag::countTags();

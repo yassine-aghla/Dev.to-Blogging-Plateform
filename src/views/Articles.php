@@ -1,6 +1,7 @@
 <?php
-
-include __DIR__.'/../config/connection.php';
+// include __DIR__.'/../config/connection.php';
+include __DIR__.'/../controler/articles.php';
+$articles = Article::getAllArticlesWithDetails();
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +69,18 @@ include __DIR__.'/../config/connection.php';
         }
         .tags-container label{
             color:#2a2185;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+            text-align: left;
         }
 
     </style>
@@ -163,7 +176,7 @@ include __DIR__.'/../config/connection.php';
 
   <div class="form-container">
         <h2>Ajouter un article</h2>
-        <form action="" method="POST">
+        <form action="../controler/articles.php" method="POST">
 
             
             <div>
@@ -202,7 +215,7 @@ include __DIR__.'/../config/connection.php';
                 </div>
             <div>
                 <label for="featured_image">Image en vedette</label>
-                <input type="file" id="featured_image" name="featured_image">
+                <input type="url" id="featured_image" name="featured_image">
             </div>
 
             <div>
@@ -221,12 +234,62 @@ include __DIR__.'/../config/connection.php';
             </div>
 
             
-            <button type="submit">Soumettre</button>
+            <button type="submit" name="submit">Soumettre</button>
 
         </form>
     </div>
 
-  
+  <h1>Liste des Articles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Extrait</th>
+                <th>Statut</th>
+                <th>Date de Programmation</th>
+                <th>Catégorie</th>
+                <th>Auteur</th>
+                <th>Date de Création</th>
+                <th>Image</th>
+                <th>Tags</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($articles)): ?>
+                <?php foreach ($articles as $article): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($article['id']) ?></td>
+                        <td><?= htmlspecialchars($article['title']) ?></td>
+                        <td><?= htmlspecialchars($article['excerpt']) ?></td>
+                        <td><?= htmlspecialchars($article['status']) ?></td>
+                        <td><?= htmlspecialchars($article['scheduled_date'] ?: 'Non programmé') ?></td>
+                        <td><?= htmlspecialchars($article['category_name']) ?></td>
+                        <td><?= htmlspecialchars($article['author_name']) ?></td>
+                        <td><?= htmlspecialchars($article['created_at']) ?></td>
+                        <td>
+                            <?php if ($article['featured_image']): ?>
+                                <img src="<?= htmlspecialchars($article['featured_image']) ?>" alt="Image" style="width: 100px; height: auto;">
+                            <?php else: ?>
+                                Aucune image
+                            <?php endif; ?>
+
+                        </td>
+                        <td><?= htmlspecialchars($article['tag_names'] ?: 'Aucun tag') ?></td>
+                        <td>
+                            <a href="edit_article.php?id=<?= $article['id'] ?>">Modifier</a> |
+                            <a href="delete_article.php?id=<?= $article['id'] ?>" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?');">Supprimer</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="10">Aucun article trouvé.</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
 
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
