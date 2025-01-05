@@ -1,8 +1,10 @@
 <?php
-require __DIR__.'/../controler/tags.php';
-require __DIR__.'/../controler/categories.php';
+require_once __DIR__.'/../controler/tags.php';
+require_once __DIR__.'/../controler/categories.php';
+require_once __DIR__.'/../controler/articles.php';
 tags::getTagCount();
 CategoriesController::getCategoryCount();
+$articlesCount = ArticlesController::getArticlesCount();
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +111,7 @@ CategoriesController::getCategoryCount();
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">0</div>
+                        <div class="numbers"><?= $articlesCount ?></div>
                         <div class="cardName">Articles</div>
                     </div>
 

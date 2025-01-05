@@ -27,7 +27,7 @@ class ArticlesController {
                     Article::addTags($articleId, $tags);
                 }
 
-                header("Location:articles.php?success=true");
+                header("Location: Articles.php");
                 exit;
             } else {
                 echo "Erreur lors de l'ajout de l'article.";
@@ -56,7 +56,7 @@ class ArticlesController {
         }
 
 
-                header("Location: articles.php?success=update");
+                header("Location: Articles.php");
                 exit;
             } else {
                 echo "Erreur lors de la mise à jour de l'article.";
@@ -77,6 +77,10 @@ class ArticlesController {
                 $stmt = $conn->prepare($query);
                 $stmt->execute();
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            public static function getArticlesCount() {
+                return Article::getArticlesCount();
+            
             }
             
     

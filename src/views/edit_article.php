@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/crudArticle.php';
 require_once __DIR__ . '/../controler/articles.php';
 if (!isset($_GET['id'])) {
-    die('ID darticle non spécifié.');
+die('ID darticle non spécifié.');
 }
 
 $id = (int) $_GET['id'];
@@ -12,7 +12,6 @@ $stmt = $conn->prepare($query);
 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
-
 if (!$article) {
     die('Article non trouvé.');
 }
@@ -104,7 +103,7 @@ if (!$article) {
 <body>
 <div class="form-container">
     <h2>Modifier l'article</h2>
-    <form action="../controler/articles.php?action=update&id=<?= $id ?>" method="POST">
+    <form action="Articles.php?action=update&id=<?= $id ?>" method="POST">
         <div>
             <label for="title">Titre</label>
             <input type="text" id="title" name="title" value="<?= htmlspecialchars($article['title']) ?>" required>
@@ -137,9 +136,11 @@ if (!$article) {
     <?php 
     $tags = ArticlesController::getAllTags();
     $articleTags = Article::getTagsForArticle($article['id']); 
+
     $articleTagIds = array_column($articleTags, 'tag_id');
-   foreach ($tags as $tag): 
-      ?>
+
+    foreach ($tags as $tag): 
+    ?>
         <input type="checkbox" name="tags[]" value="<?= $tag['id'] ?>" 
             <?= in_array($tag['id'], $articleTagIds) ? 'checked' : '' ?>> 
         <?= htmlspecialchars($tag['name']) ?><br>

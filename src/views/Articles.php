@@ -1,5 +1,5 @@
 <?php
-// include __DIR__.'/../config/connection.php';
+
 include __DIR__.'/../controler/articles.php';
 $articles = Article::getAllArticlesWithDetails();
 ?>
@@ -16,7 +16,7 @@ $articles = Article::getAllArticlesWithDetails();
     <link rel="stylesheet" href="../../assets/style.css">
     <style>
 
-        .form-container {
+        #form-container {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
@@ -24,6 +24,8 @@ $articles = Article::getAllArticlesWithDetails();
             width: 100%;
             max-width: 500px;
             margin:auto;
+            display: none; 
+       
         }
 
         .form-container h2 {
@@ -70,18 +72,91 @@ $articles = Article::getAllArticlesWithDetails();
         .tags-container label{
             color:#2a2185;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #f4f4f4;
-            text-align: left;
-        }
+       
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+thead th {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+td, th {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+td:last-child {
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between; 
+    gap: 10px; 
+}
+        #add-article-btn{
+            width: 160px;
+            }
+            
+a {
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+a[href^="edit_article.php"] {
+    margin-top: 0px;
+    color: #27ae60; 
+    border: 1px solid #27ae60;
+}
+
+a[href^="edit_article.php"]:hover {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+
+a[href^="delete_article.php"] {
+    margin-bottom: 0px;
+    color: #e74c3c; 
+    border: 1px solid #e74c3c;
+}
+
+a[href^="delete_article.php"]:hover {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+
 
     </style>
     </head>
@@ -174,9 +249,10 @@ $articles = Article::getAllArticlesWithDetails();
             </div>
   <!-- =============== formualire ================ -->
 
-  <div class="form-container">
+  <button id="add-article-btn">Add Article</button>
+  <div id="form-container">
         <h2>Ajouter un article</h2>
-        <form action="../controler/articles.php" method="POST">
+        <form action="Articles.php" method="POST">
 
             
             <div>
@@ -234,7 +310,7 @@ $articles = Article::getAllArticlesWithDetails();
             </div>
 
             
-            <button type="submit" name="submit">Soumettre</button>
+            <button type="submit" id="submit-btn" name="submit">Soumettre</button>
 
         </form>
     </div>
@@ -291,7 +367,24 @@ $articles = Article::getAllArticlesWithDetails();
         </tbody>
     </table>
 
+    <script>
+       
+        const addArticleBtn = document.getElementById('add-article-btn');
+        const formContainer = document.getElementById('form-container');
+        const submitBtn = document.getElementById('submit-btn');
 
+        
+        addArticleBtn.addEventListener('click', () => {
+            formContainer.style.display = 'block'; 
+            addArticleBtn.style.display = 'none'; 
+        });
+
+        
+        submitBtn.addEventListener('click', () => {
+            formContainer.style.display = 'none';
+            addArticleBtn.style.display = 'block'; 
+        });
+    </script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
    <script src="assets/js/chartsJS.js"></script>
 
