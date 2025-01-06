@@ -11,7 +11,7 @@ class ArticlesController {
                 'featured_image'=> $_POST['featured_image'],
                 'meta_description' => $_POST['meta_description'],
                 'category_id' => $_POST['category_id'],
-                'status' => $_POST['status'],
+                // 'status' => $_POST['status'],
                 'scheduled_date' => $_POST['scheduled_date'],
                 'author_id' => 1, 
             ];
@@ -42,7 +42,7 @@ class ArticlesController {
                 'featured_image' => $_POST['featured_image'],
                 'meta_description' => $_POST['meta_description'],
                 'category_id' => $_POST['category_id'],
-                'status' => $_POST['status'],
+                // 'status' => $_POST['status'],
                 'scheduled_date' => $_POST['scheduled_date'],
             ];
         
@@ -87,3 +87,4 @@ class ArticlesController {
 }
 
 ArticlesController::handleRequest();
+$articles = Article::getAllArticlesWithDetails();

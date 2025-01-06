@@ -59,3 +59,5 @@ public static function getTagCount() {
 // }
 
 }
+tags::addTag();
+$tags =tags::displayTags();

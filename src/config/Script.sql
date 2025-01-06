@@ -12,7 +12,7 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     bio TEXT,
-    role ENUM('Admin', 'Auteur') NOT NULL DEFAULT 'Admin'
+    role ENUM('User','Admin', 'Auteur') NOT NULL DEFAULT 'User'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Create categories table

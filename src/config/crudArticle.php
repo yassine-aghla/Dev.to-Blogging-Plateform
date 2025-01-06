@@ -12,9 +12,9 @@ class Article {
 
             
             $query = "INSERT INTO " . self::$table . " 
-                (title, content, excerpt, featured_image,meta_description, category_id, status, scheduled_date, author_id, slug) 
+                (title, content, excerpt, featured_image,meta_description, category_id,  scheduled_date, author_id, slug) 
                 VALUES 
-                (:title, :content, :excerpt, :featured_image, :meta_description, :category_id, :status, :scheduled_date, :author_id, :slug)";
+                (:title, :content, :excerpt, :featured_image, :meta_description, :category_id,  :scheduled_date, :author_id, :slug)";
 
             $stmt = $conn->prepare($query);
 
@@ -24,7 +24,7 @@ class Article {
             $stmt->bindParam(':featured_image', $data['featured_image']);
             $stmt->bindParam(':meta_description', $data['meta_description']);
             $stmt->bindParam(':category_id', $data['category_id']);
-            $stmt->bindParam(':status', $data['status']);
+            // $stmt->bindParam(':status', $data['status']);
             $stmt->bindParam(':scheduled_date', $data['scheduled_date']);
             $stmt->bindParam(':author_id', $data['author_id']);
             $stmt->bindParam(':slug', $slug);
@@ -86,7 +86,7 @@ class Article {
     
             $query = "UPDATE " . self::$table . " 
                       SET title = :title, content = :content, excerpt = :excerpt, featured_image = :featured_image, 
-                          meta_description = :meta_description, category_id = :category_id, status = :status, 
+                          meta_description = :meta_description, category_id = :category_id,  
                           scheduled_date = :scheduled_date, slug = :slug
                       WHERE id = :id";
     
@@ -98,7 +98,7 @@ class Article {
             $stmt->bindParam(':featured_image', $data['featured_image']);
             $stmt->bindParam(':meta_description', $data['meta_description']);
             $stmt->bindParam(':category_id', $data['category_id']);
-            $stmt->bindParam(':status', $data['status']);
+            // $stmt->bindParam(':status', $data['status']);
             $stmt->bindParam(':scheduled_date', $data['scheduled_date']);
             $stmt->bindParam(':slug', $slug);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);

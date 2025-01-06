@@ -1,7 +1,6 @@
 <?php
 require __DIR__.'/../controler/categories.php';
-CategoriesController::handleRequest();
-$categories =CategoriesController::displayCategories();
+
 ?>
 
 <!DOCTYPE html>
@@ -176,12 +175,12 @@ $categories =CategoriesController::displayCategories();
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>
-                        <span class="title">Auteur</span>
+                        <span class="title">user</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="sign_up.php">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

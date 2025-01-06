@@ -53,7 +53,6 @@ require __DIR__.'/../controler/tags.php';
   }
   </style>
   <?php
-// Récupérer le tag à modifier avec l'ID
 if (isset($_GET['id'])) {
     $tag = Tag::getTagById($_GET['id']);
     if (!$tag) {
@@ -65,7 +64,94 @@ if (isset($_GET['id'])) {
     exit;
 }
 ?>
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="dashboard.php">
+                        <span class="icon">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Yassine aghla</span>
+                    </a>
+                </li>
 
+                <li>
+                    <a href="dashboard.php">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="Articles.php">
+                        <span class="icon">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                        </span>
+                        <span class="title">Articles</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="categories.php">
+                        <span class="icon">
+                           <ion-icon name="grid-outline"></ion-icon>
+                        </span>
+                        <span class="title">Categorie</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="tags.php">
+                        <span class="icon">
+                        <ion-icon name="pricetag-outline"></ion-icon>
+                        </span>
+                        <span class="title">Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../includes/nationalite.php">
+                        <span class="icon">
+                        <ion-icon name="person-outline"></ion-icon>
+                        </span>
+                        <span class="title">user</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="sign_up.php">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="../../assets/me.jpg" alt="">
+                </div>
+            </div>
+      
 <h2>Modifier le Tag</h2>
 <form method="POST" action="tags.php">
     <input type="hidden" name="id" value="<?php echo $tag['id']; ?>">
@@ -73,3 +159,11 @@ if (isset($_GET['id'])) {
     <input type="text" id="tagName" name="tagName" value="<?php echo $tag['name']; ?>" required>
     <button type="submit" name="update">Modifier</button>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+   <script src="assets/js/chartsJS.js"></script>
+
+   <!-- ====== ionicons ======= -->
+   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

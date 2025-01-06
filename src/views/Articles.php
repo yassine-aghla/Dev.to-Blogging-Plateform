@@ -1,7 +1,7 @@
 <?php
 
 include __DIR__.'/../controler/articles.php';
-$articles = Article::getAllArticlesWithDetails();
+
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +92,7 @@ table {
 }
 
 thead th {
-    background-color: #2c3e50;
+    background-color:#2a2185;
     color: #fff;
     text-align: left;
     padding: 10px;
@@ -220,7 +220,7 @@ a[href^="delete_article.php"]:hover {
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="sign_up.php">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -283,9 +283,12 @@ a[href^="delete_article.php"]:hover {
             <div class="tags-container">
                 <label style="color: black;">Tags</label>
                 <?php foreach ($tags as $tag): ?>
-                    <div>
-                        <input type="checkbox" id="tag_<?= $tag['id'] ?>" name="tags[]" value="<?= $tag['id'] ?>">
-                        <label for="tag_<?= $tag['id'] ?>"><?= htmlspecialchars($tag['name']) ?></label>
+                    <div >
+                <table>
+                       <td> <label for="tag_<?= $tag['id'] ?>"><?= htmlspecialchars($tag['name']) ?></label></td>
+                       <td> <input type="checkbox" id="tag_<?= $tag['id'] ?>" name="tags[]" value="<?= $tag['id'] ?>"></td>
+                       
+                </table>
                     </div>
                 <?php endforeach; ?>
                 </div>
@@ -294,14 +297,14 @@ a[href^="delete_article.php"]:hover {
                 <input type="url" id="featured_image" name="featured_image">
             </div>
 
-            <div>
+            <!-- <div>
                 <label for="status">Statut</label>
                 <select id="status" name="status" required>
                     <option value="draft" selected>Draft</option>
                     <option value="published">Publié</option>
                     <option value="scheduled">Programmé</option>
                 </select>
-            </div>
+            </div> -->
 
             
             <div>
@@ -322,7 +325,7 @@ a[href^="delete_article.php"]:hover {
                 <th>ID</th>
                 <th>Titre</th>
                 <th>Extrait</th>
-                <th>Statut</th>
+                <!-- <th>Statut</th> -->
                 <th>Date de Programmation</th>
                 <th>Catégorie</th>
                 <th>Auteur</th>
@@ -339,7 +342,9 @@ a[href^="delete_article.php"]:hover {
                         <td><?= htmlspecialchars($article['id']) ?></td>
                         <td><?= htmlspecialchars($article['title']) ?></td>
                         <td><?= htmlspecialchars($article['excerpt']) ?></td>
-                        <td><?= htmlspecialchars($article['status']) ?></td>
+                        <!-- <td>
+                            <?= htmlspecialchars($article['status']) ?>
+                        </td> -->
                         <td><?= htmlspecialchars($article['scheduled_date'] ?: 'Non programmé') ?></td>
                         <td><?= htmlspecialchars($article['category_name']) ?></td>
                         <td><?= htmlspecialchars($article['author_name']) ?></td>

@@ -1,7 +1,6 @@
 <?php
 require __DIR__.'/../controler/tags.php';
-tags::addTag();
-$tags =tags::displayTags();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -176,12 +175,12 @@ $tags =tags::displayTags();
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>
-                        <span class="title">Auteur</span>
+                        <span class="title">user</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="sign_up.php">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

@@ -1,4 +1,12 @@
 <?php
+
+session_start();
+
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
 require_once __DIR__.'/../controler/tags.php';
 require_once __DIR__.'/../controler/categories.php';
 require_once __DIR__.'/../controler/articles.php';
@@ -73,18 +81,18 @@ $articlesCount = ArticlesController::getArticlesCount();
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>
-                        <span class="title">Auteur</span>
+                        <span class="title">User</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                        <span class="title">Sign Out</span>
-                    </a>
-                </li>
+    <a href="logout.php"> 
+        <span class="icon">
+            <ion-icon name="log-out-outline"></ion-icon>
+        </span>
+        <span class="title">Sign Out</span>
+    </a>
+</li>
             </ul>
         </div>
 

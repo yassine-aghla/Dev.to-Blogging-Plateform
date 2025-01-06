@@ -1,0 +1,33 @@
+<?php
+require_once __DIR__.'/../config/connection.php';
+
+class User {
+    private static $table = 'users';
+
+    public static function createUser($data) {
+        if (!isset($data['role'])) {
+            $data['role'] = 'user'; 
+        }
+        $conn = Database::getConnection();
+        $query = "INSERT INTO " . self::$table . " (username, email, password_hash, bio, role) 
+                  VALUES (:username, :email, :password_hash, :bio, :role)";
+        $stmt = $conn->prepare($query); 
+        return $stmt->execute([
+            ':username' => $data['username'],
+            ':email' => $data['email'],
+            ':password_hash' => $data['password_hash'],
+            ':bio' => $data['bio'],
+            ':role' => $data['role']
+        ]);
+    }
+    public static function findUserByEmail($email) {
+        $conn = Database::getConnection();
+        $query = "SELECT * FROM " . self::$table . " WHERE email = :email";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+}
+?>
