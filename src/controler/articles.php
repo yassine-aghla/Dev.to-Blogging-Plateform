@@ -82,6 +82,52 @@ class ArticlesController {
                 return Article::getArticlesCount();
             
             }
+            public static function getMostReadArticles($limit = 5) {
+                $conn = Database::getConnection();
+                $query = "SELECT articles.title, articles.slug, articles.views, articles.created_at, users.username 
+                          FROM articles 
+                          JOIN users ON articles.author_id = users.id
+                          ORDER BY articles.views DESC 
+                          LIMIT :limit";
+                
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+                $stmt->execute();
+                
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+                public static function getMostReadArticlesByAuthor($authorId, $limit = 5) {
+                    $conn = Database::getConnection();
+                    $query = "SELECT articles.title, articles.slug, articles.views, articles.created_at, users.username 
+                              FROM articles 
+                              JOIN users ON articles.author_id = users.id
+                              WHERE articles.author_id = :author_id
+                              ORDER BY articles.views DESC 
+                              LIMIT :limit";
+                    
+                    $stmt = $conn->prepare($query);
+                    $stmt->bindParam(':author_id', $authorId, PDO::PARAM_INT);
+                    $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+                    $stmt->execute();
+                    
+                    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                }
+            
+                
+                public static function getAuthorById($authorId) {
+                    $conn = Database::getConnection();
+                    $query = "SELECT id, username, bio FROM users WHERE id = :author_id";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bindParam(':author_id', $authorId, PDO::PARAM_INT);
+                    $stmt->execute();
+                    
+                    return $stmt->fetch(PDO::FETCH_ASSOC);
+                }
+            
+            
+
+
+           
             
     
 }

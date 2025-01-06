@@ -13,6 +13,7 @@ require_once __DIR__.'/../controler/articles.php';
 tags::getTagCount();
 CategoriesController::getCategoryCount();
 $articlesCount = ArticlesController::getArticlesCount();
+$mostReadArticles = ArticlesController::getMostReadArticles(4);
 ?>
 
 <!DOCTYPE html>
@@ -206,34 +207,26 @@ $articlesCount = ArticlesController::getArticlesCount();
 
     <!-- Top Articles Section -->
     <div class="top-articles card">
-        <div class="card-header">
-            <h2>Most Read Articles</h2>
-        </div>
-        <div class="card-body">
+    <div class="card-header">
+        <h2>Most Read Articles</h2>
+    </div>
+    <div class="card-body">
+        <?php foreach ($mostReadArticles as $article): ?>
             <div class="article">
                 <div class="article-info">
-                    <h3>Article Title</h3>
-                    <p>Published on: Jan 1, 2025 by Author Name</p>
-                    <p>Views: 1500</p>
+                    <h3><?php echo htmlspecialchars($article['title']); ?></h3>
+                    <p>Published on: <?php echo date('M j, Y', strtotime($article['created_at'])); ?> by <?php echo htmlspecialchars($article['username']); ?></p>
+                    <p>Views: <?php echo number_format($article['views']); ?></p>
                 </div>
                 <div class="article-actions">
-                    <button class="read-article-btn">Read Article</button>
+                    <a href="article.php?slug=<?php echo htmlspecialchars($article['slug']); ?>" class="read-article-btn">Read Article</a>
                 </div>
             </div>
-            <div class="article">
-                <div class="article-info">
-                    <h3>Article Title</h3>
-                    <p>Published on: Dec 25, 2024 by Author Name</p>
-                    <p>Views: 1200</p>
-                </div>
-                <div class="article-actions">
-                    <button class="read-article-btn">Read Article</button>
-                </div>
-            </div>
-            <!-- Add more articles as needed -->
-        </div>
+        <?php endforeach; ?>
     </div>
 </div>
+    </div>
+<!-- </div> -->
 
 
             
