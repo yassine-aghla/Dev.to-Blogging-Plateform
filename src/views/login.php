@@ -1,5 +1,6 @@
 <?php
  require __DIR__.'/../controler/users.php';
+ 
 ?>
 
 <!DOCTYPE html>
@@ -93,11 +94,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once __DIR__.'/../controler/users.php';
     $isLoggedIn = UsersController::login($_POST['email'], $_POST['password']);
     if ($isLoggedIn) {
-        header("Location:dashboard.php");
+        // session_start();
+        $role = $_SESSION['user']['role'];
+
+        if ($role === 'Admin') {
+            header("Location: dashboard.php");
+        } elseif ($role === 'Auteur') {
+            header("Location: Articles.php");
+        } elseif ($role === 'user') {
+            header("Location: index.php");
+        } else {
+            echo "Role inconnu.";
+        }
+        exit;
     } else {
-        echo "Invalid !";
+        echo "Invalid credentials!";
     }
 }
+
 ?>
 </body>
 </html>

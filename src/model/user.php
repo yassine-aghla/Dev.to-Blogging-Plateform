@@ -6,7 +6,7 @@ class User {
 
     public static function createUser($data) {
         if (!isset($data['role'])) {
-            $data['role'] = 'Admin'; 
+            $data['role'] = 'user'; 
         }
         $conn = Database::getConnection();
         $query = "INSERT INTO " . self::$table . " (username, email, password_hash, bio, role) 
@@ -53,6 +53,18 @@ class User {
         $stmt = $conn->prepare($query);
         return $stmt->execute([':id' => $userId]);
     }
-    
+    public static function updateUser($data) {
+        $conn = Database::getConnection();
+        $query = "UPDATE " . self::$table . " 
+                  SET username = :username, email = :email
+                  WHERE id = :id";
+        $stmt = $conn->prepare($query);
+        return $stmt->execute([
+            ':username' => $data['username'],
+            ':email' => $data['email'],
+            ':bio' => $data['bio'],
+            ':id' => $data['id']
+        ]);
+    }
 }
 ?>

@@ -1,11 +1,17 @@
 <?php
+session_start();
 
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+$role = $_SESSION['user']['role'];
 include __DIR__.'/src/controler/articles.php';
 $articles = array_filter($articles, function ($article) {
-    return $article['status'] !== 'draft';
+    return $article['status'] !== 'draft' ;
 });
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

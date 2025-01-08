@@ -23,6 +23,7 @@ class UsersController {
                 'username' => $user['username'],
                 'role' => $user['role']
             ];
+            
             return true;
         }
         return false;

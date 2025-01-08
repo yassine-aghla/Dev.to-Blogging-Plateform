@@ -13,7 +13,7 @@ class ArticlesController {
                 'category_id' => $_POST['category_id'],
                 // 'status' => $_POST['status'],
                 'scheduled_date' => $_POST['scheduled_date'],
-                'author_id' => 1, 
+                'author_id' => $_SESSION['user']['id'], 
             ];
 
             $tags = isset($_POST['tags']) ? $_POST['tags'] : [];
@@ -44,7 +44,7 @@ class ArticlesController {
                 'category_id' => $_POST['category_id'],
                 // 'status' => $_POST['status'],
                 'scheduled_date' => $_POST['scheduled_date'],
-                'author_id' => $author_id,
+                'author_id' => $_SESSION['user']['id'],
             ];
         
             $success = Article::updateArticle($id, $data);
