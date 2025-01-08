@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+$role = $_SESSION['user']['role'];
 require __DIR__.'/../controler/tags.php';
 
 ?>
@@ -143,7 +151,7 @@ require __DIR__.'/../controler/tags.php';
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
-
+                <?php if ($role === 'auteur'): ?>
                 <li>
                     <a href="Articles.php">
                         <span class="icon">
@@ -152,7 +160,8 @@ require __DIR__.'/../controler/tags.php';
                         <span class="title">Articles</span>
                     </a>
                 </li>
-
+                <?php endif; ?>
+                  <?php if ($role==='Admin'): ?>
                 <li>
                     <a href="categories.php">
                         <span class="icon">
@@ -161,7 +170,14 @@ require __DIR__.'/../controler/tags.php';
                         <span class="title">Categorie</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="articleDash.php">
+                        <span class="icon">
+                           <ion-icon name="document-text-outline"></ion-icon>
+                        </span>
+                        <span class="title">manage articles</span>
+                    </a>
+                </li>
                 <li>
                     <a href="tags.php">
                         <span class="icon">
@@ -178,7 +194,7 @@ require __DIR__.'/../controler/tags.php';
                         <span class="title">user</span>
                     </a>
                 </li>
-
+                <?php endif; ?>
                 <li>
                     <a href="sign_up.php">
                         <span class="icon">

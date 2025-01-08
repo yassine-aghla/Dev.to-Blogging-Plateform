@@ -1,8 +1,11 @@
 <?php
 
-include __DIR__.'/../controler/articles.php';
-
+include __DIR__.'/src/controler/articles.php';
+$articles = array_filter($articles, function ($article) {
+    return $article['status'] !== 'draft';
+});
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,13 +19,14 @@ include __DIR__.'/../controler/articles.php';
     <header class="header">
         <h1 class="logo">DEV community</h1>
         <div class="header-buttons">
-            <a href="sign_up.php" class="btn signup">Signup</a>
-            <a href="login.php" class="btn login">Login</a>
+            <a href="src/views/sign_up.php" class="btn signup">Signup</a>
+            <a href="src/views/login.php" class="btn login">Login</a>
         </div>
     </header>
 
 
     <main class="main-content">
+        
         <section class="articles">
             
             <?php foreach ($articles as $article): ?>

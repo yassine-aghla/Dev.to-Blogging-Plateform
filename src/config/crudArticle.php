@@ -53,31 +53,42 @@ class Article {
             die("Erreur lors de l'association des tags : " . $e->getMessage());
         }
     }
-    public static function getAllArticlesWithDetails() {
+    public static function getAllArticlesWithDetails($authorId = null) {
         $conn = Database::getConnection();
         $query = "
             SELECT 
                 articles.*,
                 categories.name AS category_name,
-                users.username AS author_name,GROUP_CONCAT(tags.name SEPARATOR ', ') AS tag_names
+                users.username AS author_name,
+                GROUP_CONCAT(tags.name SEPARATOR ', ') AS tag_names
             FROM 
                 articles
             INNER JOIN 
                 categories ON articles.category_id = categories.id
             INNER JOIN 
                 users ON articles.author_id = users.id
-                LEFT JOIN 
-            article_tags ON articles.id = article_tags.article_id
-        LEFT JOIN 
-            tags ON article_tags.tag_id = tags.id
-        GROUP BY 
-            articles.id
-            ORDER BY 
-                articles.created_at DESC";
+            LEFT JOIN 
+                article_tags ON articles.id = article_tags.article_id
+            LEFT JOIN 
+                tags ON article_tags.tag_id = tags.id
+        ";
+        
+        if ($authorId) {
+            $query .= " WHERE articles.author_id = :author_id";
+        }
+        
+        $query .= " GROUP BY articles.id ORDER BY articles.created_at DESC";
+        
         $stmt = $conn->prepare($query);
+        
+        if ($authorId) {
+            $stmt->bindParam(':author_id', $authorId, PDO::PARAM_INT);
+        }
+        
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     public static function updateArticle($id, $data) {
         $conn = Database::getConnection();
     

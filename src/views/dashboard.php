@@ -7,6 +7,7 @@ if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
+
 require_once __DIR__.'/../controler/tags.php';
 require_once __DIR__.'/../controler/categories.php';
 require_once __DIR__.'/../controler/articles.php';
@@ -14,6 +15,7 @@ tags::getTagCount();
 CategoriesController::getCategoryCount();
 $articlesCount = ArticlesController::getArticlesCount();
 $mostReadArticles = ArticlesController::getMostReadArticles(4);
+$role = $_SESSION['user']['role'];
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +43,7 @@ $mostReadArticles = ArticlesController::getMostReadArticles(4);
                         <span class="title">Yassine aghla</span>
                     </a>
                 </li>
-
+                <?php if ($role==='Admin'): ?>
                 <li>
                     <a href="dashboard.php">
                         <span class="icon">
@@ -50,7 +52,8 @@ $mostReadArticles = ArticlesController::getMostReadArticles(4);
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
-
+                <?php endif; ?>
+                <?php if ($role ==='Auteur'): ?>
                 <li>
                     <a href="Articles.php">
                         <span class="icon">
@@ -59,7 +62,9 @@ $mostReadArticles = ArticlesController::getMostReadArticles(4);
                         <span class="title">Articles</span>
                     </a>
                 </li>
+                <?php endif; ?>
 
+                <?php if ($role==='Admin'): ?>
                 <li>
                     <a href="categories.php">
                         <span class="icon">
@@ -68,7 +73,14 @@ $mostReadArticles = ArticlesController::getMostReadArticles(4);
                         <span class="title">Categorie</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="articleDash.php">
+                        <span class="icon">
+                           <ion-icon name="document-text-outline"></ion-icon>
+                        </span>
+                        <span class="title">manage articles</span>
+                    </a>
+                </li>
                 <li>
                     <a href="tags.php">
                         <span class="icon">
@@ -78,14 +90,14 @@ $mostReadArticles = ArticlesController::getMostReadArticles(4);
                     </a>
                 </li>
                 <li>
-                    <a href="../../nationalite.php">
+                    <a href="user.php">
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>
                         <span class="title">User</span>
                     </a>
                 </li>
-
+                <?php endif; ?>
                 <li>
     <a href="logout.php"> 
         <span class="icon">

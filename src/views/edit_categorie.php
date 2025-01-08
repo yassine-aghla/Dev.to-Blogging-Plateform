@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+$role = $_SESSION['user']['role'];
 require __DIR__.'/../model/Category.php';
 ?>
 <!DOCTYPE html>
@@ -84,7 +92,7 @@ if (isset($_GET['id'])) {
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
-
+                <?php if ($role === 'auteur'): ?>
                 <li>
                     <a href="Articles.php">
                         <span class="icon">
@@ -93,7 +101,8 @@ if (isset($_GET['id'])) {
                         <span class="title">Articles</span>
                     </a>
                 </li>
-
+                <?php endif; ?>
+                <?php if ($role==='Admin'): ?>
                 <li>
                     <a href="categories.php">
                         <span class="icon">
@@ -119,7 +128,7 @@ if (isset($_GET['id'])) {
                         <span class="title">user</span>
                     </a>
                 </li>
-
+                <?php endif; ?>
                 <li>
                     <a href="sign_up.php">
                         <span class="icon">

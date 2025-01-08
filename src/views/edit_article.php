@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+$role = $_SESSION['user']['role'];
 require_once __DIR__ . '/../config/crudArticle.php';
 require_once __DIR__ . '/../controler/articles.php';
 if (!isset($_GET['id'])) {
@@ -122,7 +130,8 @@ if (!$article) {
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
-
+                
+                <?php if ($role ==='auteur'): ?>
                 <li>
                     <a href="Articles.php">
                         <span class="icon">
@@ -131,7 +140,8 @@ if (!$article) {
                         <span class="title">Articles</span>
                     </a>
                 </li>
-
+                <?php endif; ?>
+                <?php if ($role==='Admin'): ?>
                 <li>
                     <a href="categories.php">
                         <span class="icon">
@@ -150,14 +160,14 @@ if (!$article) {
                     </a>
                 </li>
                 <li>
-                    <a href="../includes/nationalite.php">
+                    <a href="">
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>
                         <span class="title">user</span>
                     </a>
                 </li>
-
+                <?php endif; ?>
                 <li>
                     <a href="sign_up.php">
                         <span class="icon">

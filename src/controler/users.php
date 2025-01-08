@@ -34,5 +34,15 @@ class UsersController {
         header("Location: login.php");
         exit();
     }
+    public static function getAllUsers() {
+        return User::getAllUsers();
+    }
+    public static function updateRole($userId, $newRole) {
+        return User::updateRole($userId, $newRole);
+    }
+    
+    public static function banUser($userId) {
+        return User::banUser($userId);
+    }
 }
 ?>

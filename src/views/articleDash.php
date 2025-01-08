@@ -211,6 +211,15 @@ a[href^="delete_article.php"]:hover {
                         <span class="title">Categorie</span>
                     </a>
                 </li>
+                <li>
+                    <a href="articleDash.php">
+                        <span class="icon">
+                           <ion-icon name="document-text-outline"></ion-icon>
+                        </span>
+                        <span class="title">manage articles</span>
+                    </a>
+                </li>
+
 
                 <li>
                     <a href="tags.php">
@@ -239,7 +248,6 @@ a[href^="delete_article.php"]:hover {
                 </li>
             </ul>
         </div>
-  <!-- =============== Main ================ -->
         <div class="main">
             <div class="topbar">
                 <div class="toggle">
@@ -257,92 +265,18 @@ a[href^="delete_article.php"]:hover {
                     <img src="../../assets/me.jpg" alt="">
                 </div>
             </div>
-  <!-- =============== formualire ================ -->
-
-  <button id="add-article-btn">Add Article</button>
-  <div id="form-container">
-        <h2>Ajouter un article</h2>
-        <form action="Articles.php" method="POST">
-
-            
-            <div>
-                <label for="title">Titre</label>
-                <input type="text" id="title" name="title" required>
-            </div>
-             <div>
-                <label for="content">Contenu</label>
-                <textarea id="content" name="content" rows="4" required></textarea>
-            </div>
-            <div>
-                <label for="excerpt">Extrait</label>
-                <textarea id="excerpt" name="excerpt" rows="3"></textarea>
-            </div>
-             <div>
-                <label for="meta_description">Meta Description</label>
-                <input type="text" id="meta_description" name="meta_description">
-            </div>
-            <div>
-                <label for="category_id">Catégorie</label>
-                <select id="category_id" name="category_id" required>
-                    <option value="" disabled selected>Choisir une catégorie</option>
-                    <?php foreach ($categories as $category): ?>
-                        <option value="<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="tags-container">
-                <label style="color: black;">Tags</label>
-                <?php foreach ($tags as $tag): ?>
-                    <div >
-                <table>
-                       <td> <label for="tag_<?= $tag['id'] ?>"><?= htmlspecialchars($tag['name']) ?></label></td>
-                       <td> <input type="checkbox" id="tag_<?= $tag['id'] ?>" name="tags[]" value="<?= $tag['id'] ?>"></td>
-                       
-                </table>
-                    </div>
-                <?php endforeach; ?>
-                </div>
-            <div>
-                <label for="featured_image">Image en vedette</label>
-                <input type="url" id="featured_image" name="featured_image">
-            </div>
-
-            <!-- <div>
-                <label for="status">Statut</label>
-                <select id="status" name="status" required>
-                    <option value="draft" selected>Draft</option>
-                    <option value="published">Publié</option>
-                    <option value="scheduled">Programmé</option>
-                </select>
-            </div> -->
-
-            
-            <div>
-                <label for="scheduled_date">Date de programmation</label>
-                <input type="datetime-local" id="scheduled_date" name="scheduled_date">
-            </div>
-
-            
-            <button type="submit" id="submit-btn" name="submit">Soumettre</button>
-
-        </form>
-    </div>
-
-  <h1>Liste des Articles</h1>
+            <h1>Liste des Articles</h1>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Titre</th>
                 <th>Extrait</th>
-                <!-- <th>Statut</th> -->
-                <th>Date de Programmation</th>
-                <th>Catégorie</th>
-                <th>Auteur</th>
-                <th>Date de Création</th>
-                <th>Image</th>
-                <th>Tags</th>
-                <th>Actions</th>
+                <th>Statut</th>
+               <th>Auteur</th>
+
+               
+                
             </tr>
         </thead>
         <tbody>
@@ -352,27 +286,24 @@ a[href^="delete_article.php"]:hover {
                         <td><?= htmlspecialchars($article['id']) ?></td>
                         <td><?= htmlspecialchars($article['title']) ?></td>
                         <td><?= htmlspecialchars($article['excerpt']) ?></td>
-                        <!-- <td>
-                            <?= htmlspecialchars($article['status']) ?>
-                        </td> -->
-                        <td><?= htmlspecialchars($article['scheduled_date'] ?: 'Non programmé') ?></td>
-                        <td><?= htmlspecialchars($article['category_name']) ?></td>
+                      
+                                <td>
+                        <form method="POST" action="update_status.php">
+                            <input type="hidden" name="article_id" value="<?= htmlspecialchars($article['id']) ?>">
+                            <select name="status">
+                                <option value="draft" <?= $article['status'] === 'draft' ? 'selected' : '' ?>>Brouillon</option>
+                                <option value="published" <?= $article['status'] === 'published' ? 'selected' : '' ?>>Publié</option>
+                                <option value="scheduled" <?= $article['status'] === 'scheduled' ? 'selected' : '' ?>>Programmé</option>
+                            </select>
+                            <button type="submit">Update status</button>
+                        </form>
+                    </td>
+                        
+                       
                         <td><?= htmlspecialchars($article['author_name']) ?></td>
-                        <td><?= htmlspecialchars($article['created_at']) ?></td>
-                        <td>
-                            <?php if ($article['featured_image']): ?>
-                                <img src="<?= htmlspecialchars($article['featured_image']) ?>" alt="Image" style="width: 60px; height: auto;">
-                            <?php else: ?>
-                                Aucune image
-                            <?php endif; ?>
-
-                        </td>
-                        <td><?= htmlspecialchars($article['tag_names'] ?: 'Aucun tag') ?></td>
-                        <td>
-                            <a href="edit_article.php?id=<?= $article['id'] ?>">Modifier</a> |
-                            <a href="delete_article.php?id=<?= $article['id'] ?>" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?');">Supprimer</a>
-                        </td>
-                    </tr>
+                       
+                        
+                      
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
@@ -381,26 +312,7 @@ a[href^="delete_article.php"]:hover {
             <?php endif; ?>
         </tbody>
     </table>
-
-    <script>
-       
-        const addArticleBtn = document.getElementById('add-article-btn');
-        const formContainer = document.getElementById('form-container');
-        const submitBtn = document.getElementById('submit-btn');
-
-        
-        addArticleBtn.addEventListener('click', () => {
-            formContainer.style.display = 'block'; 
-            addArticleBtn.style.display = 'none'; 
-        });
-
-        
-        submitBtn.addEventListener('click', () => {
-            formContainer.style.display = 'none';
-            addArticleBtn.style.display = 'block'; 
-        });
-    </script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
    <script src="assets/js/chartsJS.js"></script>
 
    <!-- ====== ionicons ======= -->

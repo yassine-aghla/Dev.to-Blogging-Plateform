@@ -44,6 +44,7 @@ class ArticlesController {
                 'category_id' => $_POST['category_id'],
                 // 'status' => $_POST['status'],
                 'scheduled_date' => $_POST['scheduled_date'],
+                'author_id' => $author_id,
             ];
         
             $success = Article::updateArticle($id, $data);
