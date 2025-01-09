@@ -155,14 +155,13 @@ $role = $_SESSION['user']['role'];
                     <td><?php echo htmlspecialchars($user['bio']); ?></td>
                     <td><?php echo htmlspecialchars($user['role']); ?></td>
                     <td>
-                <!-- Bouton pour bannir -->
+                        
                 <form method="POST" action="user_actions.php" style="display:inline;">
                     <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                     <input type="hidden" name="action" value="ban">
                     <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir bannir cet utilisateur ?')">Bannir</button>
                 </form>
                 
-                <!-- Dropdown pour changer de rôle -->
                 <form method="POST" action="user_actions.php" style="display:inline;">
                     <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                     <select name="new_role" onchange="this.form.submit()">

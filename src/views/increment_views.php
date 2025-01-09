@@ -1,4 +1,5 @@
 <?php
+
 include __DIR__.'/../config/connection.php'; 
 
 if (isset($_GET['slug'])) {

@@ -7,8 +7,11 @@ if (!isset($_SESSION['user'])) {
 }
 $role = $_SESSION['user']['role'];
 include __DIR__.'/../controler/articles.php';
-$articles = array_filter($articles, function ($article) {
-    return $article['status'] !== 'draft' ;
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$articles = array_filter($articles, function ($article) use ($search) {
+    $isNotDraft = $article['status'] !== 'draft';
+    $matchesSearch = empty($search) || stripos($article['title'], $search) !== false;
+    return $isNotDraft && $matchesSearch;
 });
 ?>
 <!DOCTYPE html>
@@ -96,6 +99,51 @@ $articles = array_filter($articles, function ($article) {
     background-color: #c82333;
 }
 
+.search form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.search input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: border-color 0.3s ease;
+}
+
+
+.search input[type="text"]:focus {
+    border-color:#545654;
+    outline: none;
+}
+
+
+.search button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color:#545654;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.search button:hover {
+    background-color:#545654;
+}
+
         </style>
 
 </head>
@@ -116,6 +164,12 @@ $articles = array_filter($articles, function ($article) {
     </a>
 </div>
  </header>
+
+ <form method="GET" action="home.php" class="search">
+    <input type="text" name="search" placeholder="Rechercher un article par titre" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+    <button type="submit">Rechercher</button>
+</form>
+
 <div id="edit-modal" style="display: none;">
     <form action="update_account.php" method="POST">
         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id']; ?>">
