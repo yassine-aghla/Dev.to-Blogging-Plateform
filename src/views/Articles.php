@@ -8,7 +8,8 @@ if (!isset($_SESSION['user'])) {
 }
 $role = $_SESSION['user']['role'];
 include __DIR__.'/../controler/articles.php';
-
+$authorId = $_SESSION['user']['id']; 
+$articles = Article::getAllArticlesWithDetails($authorId);
 ?>
 
 <!DOCTYPE html>
@@ -178,7 +179,7 @@ a[href^="delete_article.php"]:hover {
                         <span class="icon">
                         <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
-                        <span class="title">Yassine aghla</span>
+                        <span class="title"><?php echo$_SESSION['user']['username'];?></span>
                     </a>
                 </li>
                 <?php if ($role==='Admin'): ?>

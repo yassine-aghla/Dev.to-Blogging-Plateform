@@ -47,7 +47,7 @@ $role = $_SESSION['user']['role'];
                         <span class="icon">
                         <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
-                        <span class="title">Yassine aghla</span>
+                        <span class="title"><?php echo $_SESSION['user']['username'];?></span>
                     </a>
                 </li>
 
@@ -100,7 +100,7 @@ $role = $_SESSION['user']['role'];
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>
-                        <span class="title">Auteur</span>
+                        <span class="title">user</span>
                     </a>
                 </li>
                 <?php endif; ?>
@@ -176,5 +176,11 @@ $role = $_SESSION['user']['role'];
             <?php endforeach; ?>
         </tbody>
     </table>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+   <script src="assets/js/chartsJS.js"></script>
+
+   <!-- ====== ionicons ======= -->
+   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

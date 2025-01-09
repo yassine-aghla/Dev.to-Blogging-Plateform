@@ -178,7 +178,7 @@ a[href^="delete_article.php"]:hover {
                         <span class="icon">
                         <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
-                        <span class="title">Yassine aghla</span>
+                        <span class="title"><?php echo $_SESSION['user']['username'];?></span>
                     </a>
                 </li>
                 <?php if ($role==='Admin'): ?>

@@ -37,11 +37,11 @@ $articles = array_filter($articles, function ($article) {
             
             <?php foreach ($articles as $article): ?>
     <div class="card">
-        <img src="<?= $article['featured_image']; ?>" alt="Article Image" class="card-img">
+        <img src="<?= $article['featured_image']; ?>" alt="Article Image" class="card-img" >
         <div class="card-body">
             <h2 class="card-title"><?= htmlspecialchars($article['title']); ?></h2>
             <p class="card-excerpt"><?= htmlspecialchars($article['excerpt']); ?></p>
-            <a href="article.php?slug=<?= $article['slug']; ?>" class="btn read-more">Read More</a>
+            <a href="src/views/articlesdetails.php?slug=<?= $article['slug']; ?>" class="btn read-more">Read More</a>
         </div>
     </div>
 <?php endforeach; ?>

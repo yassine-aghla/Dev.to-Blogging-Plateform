@@ -18,7 +18,7 @@ $articles = array_filter($articles, function ($article) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blogging Platform</title>
-    <link rel="stylesheet" href="styleFront.css">
+    <link rel="stylesheet" href="../../styleFront.css">
     <style>
         
 #edit-modal {
@@ -109,6 +109,12 @@ $articles = array_filter($articles, function ($article) {
         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id']; ?>">
         <button type="submit" class="btn delete" onclick="return confirmDeletion()">Supprimer Account</button>
     </form>
+    <a href="logout.php"> 
+        <span class="icon">
+            <ion-icon name="log-out-outline"></ion-icon>
+        </span>
+        <span class="title">Sign Out</span>
+    </a>
 </div>
  </header>
 <div id="edit-modal" style="display: none;">
@@ -135,7 +141,7 @@ $articles = array_filter($articles, function ($article) {
         <div class="card-body">
             <h2 class="card-title"><?= htmlspecialchars($article['title']); ?></h2>
             <p class="card-excerpt"><?= htmlspecialchars($article['excerpt']); ?></p>
-            <a href="article.php?slug=<?= $article['slug']; ?>" class="btn read-more">Read More</a>
+            <a href="increment_views.php?slug=<?= urlencode($article['slug']); ?>" class="btn read-more">Read More</a>
         </div>
     </div>
 <?php endforeach; ?>

@@ -139,7 +139,7 @@ require __DIR__.'/../controler/categories.php';
                         <span class="icon">
                         <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
-                        <span class="title">Yassine aghla</span>
+                        <span class="title"><?php echo $_SESSION['user']['username'];?></span>
                     </a>
                 </li>
                 <?php if ($role==='Admin'): ?>
@@ -189,7 +189,7 @@ require __DIR__.'/../controler/categories.php';
                     </a>
                 </li>
                 <li>
-                    <a href="../includes/nationalite.php">
+                    <a href="user.php">
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>

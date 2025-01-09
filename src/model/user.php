@@ -66,5 +66,23 @@ class User {
             ':id' => $data['id']
         ]);
     }
+    public static function getUsersCount() {
+        $conn = Database::getConnection();
+        $query = "SELECT COUNT(*) AS count FROM " . self::$table;
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }
+    public static function getUserStats($userId) {
+        $conn = Database::getConnection();
+        $query = "SELECT COUNT(articles.id) AS article_count, SUM(articles.views) AS total_views 
+                  FROM articles 
+                  WHERE articles.author_id = :author_id";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([':author_id' => $userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }
 ?>

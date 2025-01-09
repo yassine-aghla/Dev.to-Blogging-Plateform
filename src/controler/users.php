@@ -45,5 +45,11 @@ class UsersController {
     public static function banUser($userId) {
         return User::banUser($userId);
     }
+    public static function getUsersCount() {
+        return User::getUsersCount();
+    }
+    public static function getUserStats($userId) {
+        return User::getUserStats($userId);
+    }
 }
 ?>

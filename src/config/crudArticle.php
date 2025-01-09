@@ -162,5 +162,29 @@ class Article {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['count'];
     }
+    public static function getArticleBySlug($slug) {
+        $conn = Database::getConnection();
+        $query = "
+            SELECT 
+                articles.*, 
+                categories.name AS category_name, 
+                users.username AS author_name
+            FROM 
+                articles
+            INNER JOIN 
+                categories ON articles.category_id = categories.id
+            INNER JOIN 
+                users ON articles.author_id = users.id
+            WHERE 
+                articles.slug = :slug
+        ";
+    
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
+        $stmt->execute();
+    
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }
 

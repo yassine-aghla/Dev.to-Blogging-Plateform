@@ -118,7 +118,7 @@ if (!$article) {
                         <span class="icon">
                         <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
-                        <span class="title">Yassine aghla</span>
+                        <span class="title"><?php echo $_SESSION['user']['username'];?>Yassine aghla</span>
                     </a>
                 </li>
 
@@ -160,7 +160,7 @@ if (!$article) {
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="user.php">
                         <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                         </span>
@@ -245,14 +245,7 @@ if (!$article) {
             <label for="featured_image">Image en vedette</label>
             <input type="url" id="featured_image" name="featured_image" value="<?= htmlspecialchars($article['featured_image']) ?>">
         </div>
-        <div>
-            <label for="status">Statut</label>
-            <select id="status" name="status" required>
-                <option value="draft" <?= $article['status'] == 'draft' ? 'selected' : '' ?>>Draft</option>
-                <option value="published" <?= $article['status'] == 'published' ? 'selected' : '' ?>>Publié</option>
-                <option value="scheduled" <?= $article['status'] == 'scheduled' ? 'selected' : '' ?>>Programmé</option>
-            </select>
-        </div>
+        
         <div>
             <label for="scheduled_date">Date de programmation</label>
             <input type="datetime-local" id="scheduled_date" name="scheduled_date" value="<?= htmlspecialchars($article['scheduled_date']) ?>">

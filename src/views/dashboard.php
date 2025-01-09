@@ -11,10 +11,12 @@ if (!isset($_SESSION['user'])) {
 require_once __DIR__.'/../controler/tags.php';
 require_once __DIR__.'/../controler/categories.php';
 require_once __DIR__.'/../controler/articles.php';
+require_once __DIR__.'/../controler/users.php';
 tags::getTagCount();
 CategoriesController::getCategoryCount();
 $articlesCount = ArticlesController::getArticlesCount();
 $mostReadArticles = ArticlesController::getMostReadArticles(4);
+$usersCount = UsersController::getUsersCount();
 $role = $_SESSION['user']['role'];
 ?>
 
@@ -40,7 +42,7 @@ $role = $_SESSION['user']['role'];
                         <span class="icon">
                         <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
-                        <span class="title">Yassine aghla</span>
+                        <span class="title"><?php echo $_SESSION['user']['username'];?></span>
                     </a>
                 </li>
                 <?php if ($role==='Admin'): ?>
@@ -143,7 +145,7 @@ $role = $_SESSION['user']['role'];
 
                 <div class="card">
                     <div>
-                        <div class="numbers">0</div>
+                        <div class="numbers"><?php echo $usersCount; ?></div>
                         <div class="cardName">Users</div>
                     </div>
 
@@ -231,7 +233,7 @@ $role = $_SESSION['user']['role'];
                     <p>Views: <?php echo number_format($article['views']); ?></p>
                 </div>
                 <div class="article-actions">
-                    <a href="article.php?slug=<?php echo htmlspecialchars($article['slug']); ?>" class="read-article-btn">Read Article</a>
+                <a href="articlesdetails.php?slug=<?= $article['slug']; ?>" class="read-article-btn">Read Article</a>
                 </div>
             </div>
         <?php endforeach; ?>
