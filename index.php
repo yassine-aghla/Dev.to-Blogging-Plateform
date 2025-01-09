@@ -25,6 +25,7 @@ $articles = array_filter($articles, function ($article) {
     <header class="header">
         <h1 class="logo">DEV community</h1>
         <div class="header-buttons">
+       
             <a href="src/views/sign_up.php" class="btn signup">Signup</a>
             <a href="src/views/login.php" class="btn login">Login</a>
         </div>

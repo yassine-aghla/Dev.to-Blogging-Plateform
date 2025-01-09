@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . '/../config/crudArticle.php';
 
-// Récupérer le slug depuis l'URL
 if (isset($_GET['slug'])) {
     $slug = htmlspecialchars($_GET['slug']);
     $article = Article::getArticleBySlug($slug);
@@ -45,6 +44,39 @@ $role = $_SESSION['user']['role'];
     width: 100%;
     border-radius: 8px;
 }
+.article-tags{
+    color: #00BFFF;
+}
+.cat-tag {
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 8px;
+    padding: 15px; 
+    margin: 20px 0; 
+    font-family: Arial, sans-serif; 
+    line-height: 1.6; 
+}
+
+.cat-tag p {
+    margin: 0 0 10px; 
+    font-size: 14px; 
+    color: #555; 
+}
+
+.article-categories, .article-tags {
+    display: inline-block;  
+    font-weight: bold; 
+    font-size: 16px; 
+    color: #007BFF; 
+    margin-right: 10px; 
+}
+
+
+
+.cat-tag strong:hover {
+    text-decoration: underline; 
+}
+
 
 .article-title {
     font-size: 2rem;
@@ -90,6 +122,10 @@ $role = $_SESSION['user']['role'];
         <article class="article">
             <img src="<?= htmlspecialchars($article['featured_image']); ?>" alt="Image de l'article" class="article-img" height="400" width="auto">
             <h1 class="article-title"><?= htmlspecialchars($article['title']); ?></h1>
+            <div class=cat-tag>
+            <p>Categorie:<p><strong class="aricle-categories"><?= htmlspecialchars($article['category_name']); ?></strong><br>
+            <p>tags:<p><strong class="article-tags"><?= htmlspecialchars($article['tag_names'] ?? 'Aucun tag disponible');?> </strong> 
+           </div>
             <p class="article-meta">Publié le <?= htmlspecialchars($article['created_at']); ?> par <?= htmlspecialchars($article['author_name']); ?></p>
             <div class="article-content">
                 <?= nl2br(htmlspecialchars($article['content'])); ?>
@@ -99,8 +135,9 @@ $role = $_SESSION['user']['role'];
             <a href="dashboard.php" class="btn back-btn">Retour</a>
             <?php endif; ?>
             <?php if ($role==='user'): ?>
-        <a href="index.php" class="btn back-btn">Retour</a>
+        <a href="home.php" class="btn back-btn">Retour</a>
         <?php endif; ?>
+       
     </main>
 </body>
 </html>

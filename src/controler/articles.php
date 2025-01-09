@@ -135,3 +135,4 @@ class ArticlesController {
 
 ArticlesController::handleRequest();
 $articles = Article::getAllArticlesWithDetails();
+$articlesCountByAuthors = Article::getArticlesCountByAuthors();

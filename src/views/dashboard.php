@@ -2,7 +2,10 @@
 
 session_start();
 
-
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !=='Admin') {
+    header('Location: index.php');
+    exit();
+}
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
@@ -18,6 +21,10 @@ $articlesCount = ArticlesController::getArticlesCount();
 $mostReadArticles = ArticlesController::getMostReadArticles(4);
 $usersCount = UsersController::getUsersCount();
 $role = $_SESSION['user']['role'];
+$authorArticlesCount = [];
+foreach ($articlesCountByAuthors as $author) {
+    $authorArticlesCount[$author['username']] = $author['article_count'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -191,34 +198,15 @@ $role = $_SESSION['user']['role'];
             <h2>Top Authors</h2>
         </div>
         <div class="card-body">
+        <?php foreach ($mostReadArticles as $article): ?>
             <div class="author">
-                <div class="author-profile">
-                    <img src="author1.jpg" alt="Author 1">
-                </div>
                 <div class="author-info">
-                    <h3>Author Name</h3>
-                    <p>Articles: 25 | Views: 320</p>
-                </div>
-                <div class="author-actions">
-                    <button class="view-profile-btn">View Profile</button>
+                    <h3><?php echo htmlspecialchars($article['username']); ?></h3>
+                    <p>Articles: <?php echo $authorArticlesCount[$article['username']] ?? 0; ?> | Views:<?php echo number_format($article['views']); ?></p>
                 </div>
             </div>
-            <div class="author">
-                <div class="author-profile">
-                    <img src="author2.jpg" alt="Author 2">
-                </div>
-                <div class="author-info">
-                    <h3>Author Name</h3>
-                    <p>Articles: 30 | Views: 450</p>
-                </div>
-                <div class="author-actions">
-                    <button class="view-profile-btn">View Profile</button>
-                </div>
-            </div>
-            <!-- Add more authors as needed -->
-        </div>
-    </div>
-
+        
+            <?php endforeach; ?>
     <!-- Top Articles Section -->
     <div class="top-articles card">
     <div class="card-header">

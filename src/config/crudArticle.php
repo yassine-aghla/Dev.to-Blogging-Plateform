@@ -168,15 +168,21 @@ class Article {
             SELECT 
                 articles.*, 
                 categories.name AS category_name, 
-                users.username AS author_name
+                users.username AS author_name,
+                GROUP_CONCAT(tags.name SEPARATOR '| ') AS tag_names
             FROM 
                 articles
             INNER JOIN 
                 categories ON articles.category_id = categories.id
             INNER JOIN 
                 users ON articles.author_id = users.id
+                 LEFT JOIN 
+                article_tags ON articles.id = article_tags.article_id
+            LEFT JOIN 
+                tags ON article_tags.tag_id = tags.id
             WHERE 
                 articles.slug = :slug
+                GROUP BY articles.id
         ";
     
         $stmt = $conn->prepare($query);
@@ -184,6 +190,18 @@ class Article {
         $stmt->execute();
     
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public static function getArticlesCountByAuthors() {
+        $conn = Database::getConnection();
+        $query = "
+            SELECT users.username, COUNT(articles.id) AS article_count
+            FROM articles
+            INNER JOIN users ON articles.author_id = users.id
+            GROUP BY users.id
+        ";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
 }

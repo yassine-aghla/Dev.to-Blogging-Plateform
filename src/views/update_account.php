@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $isUpdated = User::updateUser($data);
     if ($isUpdated) {
-        header("Location:index.php"); 
+        header("Location:home.php"); 
     } else {
         echo "Failed to update account.";
     }

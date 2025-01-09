@@ -6,7 +6,7 @@ class User {
 
     public static function createUser($data) {
         if (!isset($data['role'])) {
-            $data['role'] = 'user'; 
+            $data['role'] ='user'; 
         }
         $conn = Database::getConnection();
         $query = "INSERT INTO " . self::$table . " (username, email, password_hash, bio, role) 
@@ -74,15 +74,7 @@ class User {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['count'];
     }
-    public static function getUserStats($userId) {
-        $conn = Database::getConnection();
-        $query = "SELECT COUNT(articles.id) AS article_count, SUM(articles.views) AS total_views 
-                  FROM articles 
-                  WHERE articles.author_id = :author_id";
-        $stmt = $conn->prepare($query);
-        $stmt->execute([':author_id' => $userId]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+ 
     
 }
 ?>

@@ -48,8 +48,6 @@ class UsersController {
     public static function getUsersCount() {
         return User::getUsersCount();
     }
-    public static function getUserStats($userId) {
-        return User::getUserStats($userId);
-    }
+   
 }
 ?>

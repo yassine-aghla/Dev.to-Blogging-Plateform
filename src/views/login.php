@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($role === 'Auteur') {
             header("Location: Articles.php");
         } elseif ($role === 'user') {
-            header("Location: index.php");
+            header("Location:home.php");
         } else {
             echo "Role inconnu.";
         }
